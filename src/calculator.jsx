@@ -25,7 +25,7 @@ const Calculator = () => {
     if (Number.isInteger(Number(inputValue[inputValue.length - 1]))) {
       currentInput = eval(inputValue) ? String(eval(inputValue)) : "Ошибка";
       setInputValue(
-        currentInput === "Infinity" ? "На ноль делить нельзя" : currentInput
+        currentInput === "Infinity" ? "Не делите на ноль" : currentInput
       );
       currentInput = "";
     } else {
