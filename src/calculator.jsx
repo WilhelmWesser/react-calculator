@@ -6,14 +6,31 @@ import Buttons from "./components/buttons.jsx";
 const Calculator = () => {
   let [inputValue, setInputValue] = useState("");
   let currentInput = "";
+
   const onAdd = (char) => {
     currentInput += char;
+    console.log(currentInput);
+    console.log(
+      Number.isInteger(Number(currentInput[currentInput.length - 1]))
+    );
     setInputValue(currentInput);
   };
 
   const resetInputValue = () => {
     currentInput = "";
     setInputValue(currentInput);
+  };
+
+  const getResult = () => {
+    if (Number.isInteger(Number(inputValue[inputValue.length - 1]))) {
+      currentInput = eval(inputValue) ? String(eval(inputValue)) : "Ошибка";
+      setInputValue(
+        currentInput === "Infinity" ? "На ноль делить нельзя" : currentInput
+      );
+      currentInput = "";
+    } else {
+      setInputValue("Ошибка");
+    }
   };
 
   const [numberArrays, setNumberArrays] = useState([
@@ -45,11 +62,6 @@ const Calculator = () => {
     { value: "*", action: onAdd },
     { value: "/", action: onAdd },
   ]);
-
-  const getResult = () => {
-    currentInput = eval(inputValue) ? eval(inputValue) : "Ошибка";
-    setInputValue(currentInput);
-  };
 
   return (
     <div className="calculator">
